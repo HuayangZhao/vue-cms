@@ -10,9 +10,14 @@
         <hr>
         <!-- 内容区域 -->
         <div class="content" v-html="newObj.content"></div>
+
+        <!-- 评论区组件 -->
+         <comment-box :id="this.id"></comment-box>
     </div>
 </template>
 <script>
+// 导入评论组件  并在vue实例注册组件
+import comment from "../../components/comment.vue"
 import { Toast } from "mint-ui";
 export default {
     data(){
@@ -27,7 +32,7 @@ export default {
     methods:{
         getNewInfo(){
             this.$http.get('api/getnew/'+ this.id).then(result=>{
-                console.log(result)
+                // console.log(result)
                 if(result.body.status === 0){
                     this.newObj = result.body.message[0]
                 }else{
@@ -35,6 +40,9 @@ export default {
                 }
             })
         }
+    },
+    components:{
+        "comment-box":comment,
     }
     
 }
