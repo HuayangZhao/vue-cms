@@ -9,10 +9,10 @@
         <!--九宫格导航栏-->
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <a href="#">
+                <router-link to="/home/newLists">
                     <img src="../../img/menu1(1).png" >
                     <div class="mui-media-body">新闻资讯</div>
-                </a>
+                </router-link>
             </li>
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
                 <a href="#">
@@ -64,7 +64,7 @@
         },
         methods: {
             getBanner() {
-                this.$http.get('http://www.lovegf.cn:8899/api/getlunbo').then(result => {
+                this.$http.get('api/getlunbo').then(result => {
                     // console.log(result);
                     if (result.body.status === 0) {
                         this.bannerinfo = result.body.message
@@ -83,18 +83,21 @@
 </script>
 
 <style lang="less">
+.home-container {
+    // 轮播图
     .mint-swipe {
         height: 200px;
-        .mui-grid-view {
-            background-color: #fff;
+    }
+    // 九宫格
+    .mui-grid-view.mui-grid-view {
+        background-color: #fff;
+        border: none;
+        li{
             border: none;
-            .mui-table-view-cell {
-                border: none;
-                img {
-                    width: 50%;
-                }
+            img{
+                width: 60%;
             }
-
         }
     }
+}   
 </style>

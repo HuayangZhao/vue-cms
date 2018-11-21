@@ -32,7 +32,6 @@
 <script>
 </script>
 <style lang="less">
-
     body {
         background-color: #fff;
     }

@@ -18,6 +18,15 @@ import  "./lib/mui/fonts/mui-icons-extra.ttf"
 // 导入vue-resource请求
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
+Vue.http.options.root = 'http://www.lovegf.cn:8899/';
+// 引入时间格式化包
+import moment from 'moment'
+// 定义全局过滤器
+Vue.filter('dateFormat',function(dateStr,pattern="YYYY-MM-DD HH:mm:ss"){
+ // pattern="YYYY-MM-DD HH:mm:ss" 第二个参数是给过滤器设置默认格式参数 这里设置后 管道符后如果没有传参也不会是undifinde
+ // moment(dataStr 不传这个参数获取的就是目前时间).format(pattern format内这个参数是指定格式)
+  return moment(dateStr).format(pattern)
+})
 
 
 Vue.config.productionTip = false
