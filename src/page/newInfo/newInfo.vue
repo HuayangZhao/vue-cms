@@ -53,7 +53,7 @@ export default {
         h5{
             text-align: center;
             font-weight: 700;
-            color: #f00dac;
+            color: #0a07f1;
             margin-bottom: 10px;
         }
         .subtitle{

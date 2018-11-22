@@ -25,7 +25,7 @@
     </footer>
     <!--中间部分-->
       <transition>
-            <router-view></router-view>
+            <router-view class="centerContainer"></router-view>
       </transition>
   </div>
 </template>
@@ -34,6 +34,15 @@
 <style lang="less">
     body {
         background-color: #fff;
+         margin: 0 auto;
+         .mint-header.is-fixed {
+            // width: 100%;
+            margin: 0 auto;
+        }
+    }
+    body,footer,header{
+        max-width: 460px;
+        min-width: 300px;
     }
     .app-container {
         overflow-x: hidden;

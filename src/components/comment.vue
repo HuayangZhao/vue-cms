@@ -2,14 +2,14 @@
     <div class="comment-container">
         <h4>发表评论</h4>
         <hr>
-        <textarea name="" placeholder="请输入要评论的内容,请注意文明用语,最多输入120个字" maxlength="120"></textarea>
-        <mt-button type="primary" size="large">发表评论</mt-button>
+        <textarea name="" placeholder="请输入要评论的内容,请注意文明用语,最多输入120个字" maxlength="120" v-model="msg"></textarea>
+        <mt-button type="primary" size="large" @click="postComment">发表评论</mt-button>
             <ul class="mui-table-view">
-                <li class="mui-table-view-cell mui-media" v-for="(item,i) in commentmsg" :key="item.add_time">
+                <li class="mui-table-view-cell mui-media" v-for="(item,i) in commentmsg" :key="i">
                     <div class="mui-media-body">
                         <span>第{{i+1}}楼&nbsp;&nbsp;用户:&nbsp;{{ item.user_name }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发表时间:{{ item.add_time | dateFormat }}</span>
                         <hr>
-                        <p> {{ item.content === 'undefined' ? '此用户很懒，嘛都没说': item.content }}</p>
+                        <p> {{item.content === 'undefined' ? '此用户很懒，嘛都没说': item.content }}</p>
                     </div>
                 </li>
             </ul>
@@ -22,7 +22,8 @@ export default {
     data(){
         return {
             pageIndex:1, //默认显示第一页
-            commentmsg:[]
+            commentmsg:[],
+            msg:''
         }
     },
     created(){
@@ -47,6 +48,33 @@ export default {
            this.pageIndex++;
            this.getNewComment();
         },
+        // 提交评论
+        postComment(){
+            if(this.msg.trim().length === 0){
+                return Toast("评论内容不能为空！");
+            }
+            this.$http.post('api/postcomment/' + this.id,{content:this.msg},{ emulateJSON:true }).then(result=>{
+                // console.log(result)
+                if(result.body.status === 0){
+                    // this.pageIndex = 1;
+                    // this.commentmsg=[];
+                    // this.getNewComment();
+                    // this.msg = ''; 
+                     var cmt = {
+                        user_name: "汪琳琳",
+                        add_time: Date.now(),
+                        content: this.msg.trim()
+                    };
+                    this.commentmsg.unshift(cmt);
+                    // Data中的数据变化了 用到data数据的地方会自动刷新 不用重新调用函数刷新
+                    // this.getNewComment();
+                    this.msg = "";
+                    Toast("评论成功！");
+                }else {
+                    Toast("评论失败！请重试");
+                }
+            })
+        }
     },
      props: ["id"],
 }
