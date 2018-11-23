@@ -28,7 +28,15 @@ Vue.filter('dateFormat',function(dateStr,pattern="YYYY-MM-DD HH:mm:ss"){
  // moment(dataStr 不传这个参数获取的就是目前时间).format(pattern format内这个参数是指定格式)
   return moment(dateStr).format(pattern)
 })
-
+// 图片懒加载
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  error: '/src/img/menu2.png',
+  loading: '/src/img/menu3.png',
+})
+// 图片预览
+import VuePreview from 'vue2-preview'
+Vue.use(VuePreview)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */

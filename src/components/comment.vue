@@ -66,8 +66,8 @@ export default {
                         content: this.msg.trim()
                     };
                     this.commentmsg.unshift(cmt);
-                    // Data中的数据变化了 用到data数据的地方会自动刷新 不用重新调用函数刷新
-                    // this.getNewComment();
+                            // Data中的数据变化了 用到data数据的地方会自动刷新 不用重新调用函数刷新
+                            // this.getNewComment();
                     this.msg = "";
                     Toast("评论成功！");
                 }else {
