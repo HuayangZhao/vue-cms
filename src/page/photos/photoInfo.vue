@@ -10,8 +10,8 @@
         <hr>
         <!-- 缩略图区域 -->
         <div class="thumbs">
-            <img class="preview-img" v-for="(item, index) in imgList" :src="item.src" height="100" @click="$preview.open(index, imgList)" :key="item.src">
-            <!-- <img class="preview-img" v-for="(item, index) in imgList" src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2073776686,2667685421&fm=26&gp=0.jpg" @click="$preview.open(index, imgList)" :key="item.src"> -->
+            <!--<img class="preview-img" v-for="(item, index) in imgList" :src="item.src" height="100" @click="$preview.open(index, imgList)" :key="item.src">-->
+             <img class="preview-img" v-for="(item, index) in imgList" :src="item.src" @click="$preview.open(index, imgList)" :key="item.src">
         </div>
         <!-- 内容区域 -->
         <div class="content" v-html="content.content"></div>
@@ -29,7 +29,11 @@ export default {
             // 图文详情
             content:[],
             // 缩略图数组
-            imgList:[]
+            imgList:[{
+                src:'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2073776686,2667685421&fm=26&gp=0.jpg',
+                w:600,
+                h:400
+            }]
         }
     },
     created(){
@@ -53,7 +57,7 @@ export default {
                     element.w = 600;
                     element.h = 400;
                 });
-                this.imgList = result.body.message
+                // this.imgList = result.body.message
             })
         }
     },

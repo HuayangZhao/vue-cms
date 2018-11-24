@@ -93,18 +93,35 @@
   + 最终，用过查询,选择了加装外挂 plan B  移除严格模式： 使用这个插件 babel-plugin-transform-remove-strict-mode
   + 然鹅,貌似不能用了...最终选择修改.babelrc略过模块
   ```
-	{
-	 	"ignore": [
-	    	"./src/js/directive/datePicker.js"
-		]
-	}
-	```
+  {
+    "ignore": [
+        "./src/js/directive/datePicker.js"
+    ]
+  }
+  ```
  5. (坑二)刚进入 图片分享页面的时候， 滑动条无法正常工作，但刷新一下就可以了, 经过分析(其实折腾了很久.....)，发现， 如果要初始化 滑动条，必须要等 DOM 元素加载完毕，所以，把初始化 滑动条的代码，搬到了 mounted 生命周期函数中；
  6. (坑三)当 滑动条 调试OK后，发现， tabbar 无法正常工作了，这时候(简直一脸懵逼,有推到自己写个滑动导航的冲动,想想都到这一步了...算了吧)各种捯饬，最终发现需要把每个 tabbar 按钮的样式中  `mui-tab-item` 重新改一下名字就好了,原因,猜测是和mui的JS文件冲突了；
  7.谷歌浏览器对滑动会发出警告"[Intervention] Unable to preventDefault inside passive event listener due to target being treated as passive."
- 在样式中加入
- ```
- * {
-    touch-action: pan-y;
-  }
- ```
+ 在样式中加入` * { touch-action: pan-y; }`
+
+### 制作图片列表区域
+1. 图片列表需要使用懒加载技术
+2. 渲染图片列表数据
+
+## 实现了 点击图片 跳转到 图片详情页面
+1. 在改造 li 成 router-link 的时候，需要使用 tag 属性指定要渲染为 哪种元素
+
+## 实现 详情页面的布局和美化，同时获取数据渲染页面
+
+## 实现 图片详情中 缩略图的功能
+1. 使用 插件 vue-preview 这个缩略图插件
+2. 注意： img标签上的class不能去掉
+3. 注意： 每个 图片数据对象中，必须有 w 和 h 属性
+
+## 绘制 商品列表 页面基本结构并美化
+
+## 尝试在手机上 去进行项目的预览和测试
+
+
+
+ 
