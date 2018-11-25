@@ -1,6 +1,25 @@
 <template>
     <div class="goodsList-container">
-        <div class="goodslist" v-for="item in goodsList" :key="item.id">
+        <!-- 这是利用标签跳转页面 -->
+        <!-- <router-link :to="'/home/goodsInfo/'+item.id" class="goodslist" v-for="item in goodsList" :key="item.id" tag="div">
+            <div class="goodsimg" >
+                <img src="../../img/menu2.png" alt="">
+            </div>
+            <h3>{{ item.title }}</h3>
+            <div class="goodsInfo">
+                <p>￥{{ item.sell_price }}&nbsp;&nbsp;&nbsp;<del>￥{{ item.market_price}}</del></p>
+                <div>
+                    <span>热卖中</span>
+                    <span>剩{{ item.stock_quantity }}件</span>
+                </div>
+            </div>
+        </router-link> -->
+
+
+        <!-- 这是利用编程式导航跳转 -->
+        <!-- 1.绑定事件 把id作为参数 -->
+        <!-- 2.在实例中注册事件 -->
+        <div class="goodslist" v-for="item in goodsList" :key="item.id" @click="toGoods(item.id)">
             <div class="goodsimg" >
                 <img src="../../img/menu2.png" alt="">
             </div>
@@ -45,7 +64,7 @@ import mui from "../../lib/mui/js/mui.min.js";
         methods:{
             getGoodsList(){
                 this.$http.get('api/getgoods?pageindex='+this.pageIndex).then(result=>{
-                    console.log(result);
+                    // console.log(result);
                     if(result.body.status == 0){
                         this.goodsList = this.goodsList.concat(result.body.message)
                     }
@@ -54,6 +73,14 @@ import mui from "../../lib/mui/js/mui.min.js";
             getMore(){
                 this.pageIndex++;
                 this.getGoodsList()
+            },
+            toGoods(id){
+                // 1. 最简单的
+                // this.$router.push('/home/goodsInfo/'+ id)
+                // 2. 传递对象
+                // this.$router.push({ path: "/home/goodsInfo/" + id });
+                // 3. 传递命名的路由 name: "goodsInfo"是在路有种定义的 是路由规则的名字
+                this.$router.push({ name: "goodsInfo", params: { id } });
             }
         }
     }

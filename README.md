@@ -115,12 +115,42 @@
 
 ## 实现 图片详情中 缩略图的功能
 1. 使用 插件 vue-preview 这个缩略图插件
-2. 注意： img标签上的class不能去掉
-3. 注意： 每个 图片数据对象中，必须有 w 和 h 属性
+2. img标签上的class不能去掉
+3. 每个 图片数据对象中，必须有 w 和 h 属性
 
 ## 绘制 商品列表 页面基本结构并美化
+1. 主要用到flex布局
+2. 点击列表使用编程式导航跳转 `this.$router.push({ name: "goodsInfo", params: { id } });`
 
 ## 尝试在手机上 去进行项目的预览和测试
+
+### 制作商品详情区域
+1. 抽离轮播图组件,利用属性绑定`:class="{full: isfull}"` ,`.full {width:100%}`设置轮播图片在不同地方的宽度
+2. 商品评论导航跳转根据id展示评论组件
+
+### 制作加入购物车
+1.点击加入购物执行半场动画时 transition需要单独给name属性 因为父组件也使用了transition 需要区分
+2.半场动画做屏幕适配
+ ```
+   enter(el,done){
+        el.offsetWidth;
+         // 获取小球的 在页面中的位置
+        const ballPosition = this.$refs.ball.getBoundingClientRect();
+        // console.log( ballPosition)
+        // 获取 购物车徽标 在页面中的位置
+        const badgePosition = document
+            .getElementById("badge")
+            .getBoundingClientRect();
+
+        const xDist = badgePosition.left - ballPosition.left;
+        const yDist = badgePosition.top - ballPosition.top;
+
+        el.style.transform = `translate(${xDist}px, ${yDist}px)`;
+        el.style.transition = "all 1s cubic-bezier(.4,-0.3,1,.68)";
+        done();
+    }
+  ```
+3.利用vuex进行组件之间的传值
 
 
 

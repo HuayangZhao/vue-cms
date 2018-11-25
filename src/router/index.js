@@ -11,6 +11,9 @@ import newInfoContainer from "../page/newInfo/newInfo.vue"
 import photosContainer from "../page/photos/photos.vue"
 import photoInfo from "../page/photos/photoInfo.vue"
 import goodsList from "../page/goods/goodsList.vue"
+import goodsInfo from "../page/goods/goodsInfo.vue"
+import goodsConent from "../page/goods/goodsConent.vue"
+import goodsComment from '../page/goods/goodsComment.vue'
 // 创建路由并暴露出去
 export default new Router({
   routes: [
@@ -23,7 +26,10 @@ export default new Router({
       {path:'/home/newInfo/:id',component:newInfoContainer},
       {path:'/home/photoInfo/:id',component: photoInfo},
       {path:'/home/photos',component: photosContainer},
-      {path:'/home/goodsList',component: goodsList}
+      {path:'/home/goodsList',component: goodsList},
+      {path:'/home/goodsInfo/:id',component: goodsInfo, name: "goodsInfo"},
+      {path:'/home/goodsConent/:id',component: goodsConent,name: 'goodsdesc' },
+      {path:'/home/goodsComment/:id',component: goodsComment,name: 'goodscomment'  }
   ],
    // 设置当前选中类名 覆盖默认的选中类router-link-active
     linkActiveClass:'mui-active'
