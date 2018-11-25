@@ -1,11 +1,13 @@
 <template>
     <div class="home-container">
         <!--轮播图-->
-        <mt-swipe :auto="3000">
+        <!-- <mt-swipe :auto="3000">
             <mt-swipe-item v-for="item in bannerinfo" :key="item.img">
                 <a :href="item.url"><img src="item.img"></a>
             </mt-swipe-item>
-        </mt-swipe>
+        </mt-swipe> -->
+        <swiper :bannerinfo="bannerinfo" :isfull="true"></swiper>
+
         <!--九宫格导航栏-->
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -51,7 +53,8 @@
 <script>
     // 导入提示框
     import {Toast} from 'mint-ui';
-
+    // 导入轮播图
+    import swiper from "../../components/swiper.vue"
     export default {
         data() {
             return {
@@ -78,16 +81,15 @@
                     }
                 })
             }
-        }
+        },
+       components:{
+           swiper
+       } 
     }
 </script>
 
 <style lang="less">
 .home-container {
-    // 轮播图
-    .mint-swipe {
-        height: 200px;
-    }
     // 九宫格
     .mui-grid-view.mui-grid-view {
         background-color: #fff;
