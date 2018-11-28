@@ -1,4 +1,5 @@
 <template>
+<!-- 商品详情 -->
   <div class="goodsdesc-container">
     <h3>{{ info.title }}</h3>
 
