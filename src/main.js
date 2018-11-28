@@ -40,6 +40,7 @@ Vue.use(VuePreview)
 
 // 导入Vuex
 import store from "./vuex/vuex.js"
+
 Vue.config.productionTip = false
 
 new Vue({

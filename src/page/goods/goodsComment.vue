@@ -1,4 +1,5 @@
 <template>
+<!-- 商品评论 -->
   <div class="goodsComment">
     <cmtbox :id="$route.params.id"></cmtbox>
   </div>

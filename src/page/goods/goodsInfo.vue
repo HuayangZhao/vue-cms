@@ -74,7 +74,8 @@ export default {
             lunbotu:[],
             goodsInfo:{},
             number:1,
-            ballFlag:false
+            ballFlag:false,
+            state:true //商品状态
         }
     },
     created(){
@@ -133,8 +134,10 @@ export default {
             var goodsObj = {}; //点击购物车把商品数量,ID存入对象{id:88,number:2} 传给购物车徽标
             goodsObj.number = this.number;
             goodsObj.id = this.id;
-            this.$store.state.car.push(goodsObj)
-            console.log(this.$store.state.car)
+            goodsObj.state = this.state;
+            // this.$store.state.car.push(goodsObj) 不推荐直接修改$store.state中的状态数据 出问题不容易找到哪里出错 只能用$store中的mutations来实现数据的修改
+            this.$store.commit('addToCar',goodsObj)
+            // console.log(this.$store.state.car)
         },
         beforeEnter(el){
             el.style.transform = "translate(0, 0)";
