@@ -8,11 +8,12 @@ import router from './router'
 // 引入MUI
 import "./lib/mui/css/mui.css"
 // 引入头部,轮播图
-import {Header, Swipe, SwipeItem,Button} from 'mint-ui';
+import {Header, Swipe, SwipeItem,Button,Switch} from 'mint-ui';
 Vue.component(Header.name, Header);
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
 Vue.component(Button.name, Button);
+Vue.component(Switch.name, Switch);
 // 导入mui字体图标样式
 import "./lib/mui/css/icons-extra.css"
 import  "./lib/mui/fonts/mui-icons-extra.ttf"

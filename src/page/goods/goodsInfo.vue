@@ -32,7 +32,7 @@
             </div>
             <div class="mui-card-footer">
                 <mt-button type="primary" size="small">立即购买</mt-button>
-                <mt-button type="danger" size="small" @click="addCar">加入购物车{{$store.state.count}}</mt-button>
+                <mt-button type="danger" size="small" @click="addCar">加入购物车</mt-button>
             </div>
         </div>
         <!-- 购物车小球动画 -->

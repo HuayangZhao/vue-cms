@@ -1,20 +1,22 @@
 <template>
     <div class="shoppingcar-Container">
-        <div class="mui-card" v-for="item in goodsCar" :key="item.id">
+        <!-- 购物车列表 -->
+        <div class="mui-card" v-for="(item,i) in goodsCar" :key="item.id">
             <div class="mui-card-content">
                 <div class="mui-card-content-inner">
                     <ul class="mui-table-view">
                         <li class="mui-table-view-cell mui-media">
+                            <mt-switch v-model="$store.getters.getSelect[item.id]" @change="selected(item.id,$store.getters.getSelect[item.id])"></mt-switch>
                             <img class="mui-media-object mui-pull-left" :src="item.thumb_path">
                             <div class="mui-media-body">
                                 {{item.title}}
                                 <p class="mui-ellipsis">
-                                    <span>￥{{item.sell_price}} </span>&nbsp;&nbsp;&nbsp;
-                                    <input type="button" value="-">
-                                    <input type="text" :value="item.cou">
-                                    <input type="button" value="+" >
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a href="javascript:;">删除</a>
+                                    <span>￥{{item.sell_price}} </span>
+                                    <input type="button" value="-" @click="reduce(item.id)">
+                                    <input type="text" readonly :value="$store.getters.getShopNum[item.id]">
+                                    <input type="button" value="+" @click="add(item.id)">
+                                    &nbsp;
+                                    <a href="javascript:;" @click.prevent="remove(item.id,i)">删除</a>
                                 </p>
                             </div>
                         </li>
@@ -22,6 +24,7 @@
                 </div>
             </div>
         </div>
+        <!-- 结算区域 -->
         <div class="mui-card">
             <div class="mui-card-content">
                 <div class="mui-card-content-inner jiesuan">
@@ -39,11 +42,11 @@
 export default {
     data(){
         return {
-           goodsCar:[] //购物车商品
+           goodsCar:[], //购物车商品
         }
     },
     created(){
-        this.getGoods()
+        this.getGoods();
     },
     methods:{
         getGoods(){
@@ -52,17 +55,31 @@ export default {
             this.$store.state.car.forEach(item => {
                 carIds.push(item.id)
             });
-            // 如果购物车中没有商品 carIds是空数组 不应该发送请求
-            if(carIds.length <= 0){
+            // 如果购物车中没有商品 carIds是空 不应该发送请求
+            if(carIds.length == 0){
                 return;
             }
             this.$http.get('api/goods/getshopcarlist/'+ carIds.join(',')).then(result=>{
                 // console.log(result)
                 if(result.body.status==0 ){
                     this.goodsCar = result.body.message
-                     console.log(this.goodsCar)
+                    // 服务器返回的数据商品数量都为1 所以我们需要把本地存储的数量取出来进行页面渲染
+                    //  console.log(this.goodsCar)
                 }
             })
+        },
+        add(id){
+            this.$store.commit('addNum',id)
+        },
+        reduce(id){
+            this.$store.commit('reduceNum',id)
+        },
+        remove(id,i){
+           this.goodsCar.splice(i,1);
+           this.$store.commit("removeCar", id);
+        },
+        selected(id,val){
+           this.$store.commit("updateSelect",{ id, state: val })
         }
     }
 }
@@ -71,10 +88,13 @@ export default {
 .shoppingcar-Container {
     .mui-table-view-cell {
         border-top: 1px solid #ccc;
-         padding: 5px 20px;
+         padding: 5px 10px;
          display: flex;
         //  justify-content: space-between;
          align-items:center;
+         .mui-switch{
+             left:5px;
+         }
     }
     .mui-card-content-inner{
         padding: 0;
@@ -83,6 +103,7 @@ export default {
             height: 60px;
             max-width: 70px;
             vertical-align: middle;
+            margin-left: 10px;
         }
     }
     .mui-ellipsis{
@@ -90,7 +111,7 @@ export default {
         span {
             color: red;
             font-weight: 700;
-            font-size: 16px
+            font-size: 16px;
         }
         input{
             width: 30px;
