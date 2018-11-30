@@ -90,6 +90,20 @@ export default  new Vuex.Store({
             o[item.id] = item.state;
         })
         return o;
+    },
+    // 获取购物车商品总数
+    getNumTrue(state){
+        var o = {
+            num : 0 ,//购物车勾选数量
+            total : 0 //购物车总价
+        } ;
+        state.car.forEach(item=>{
+            if(item.state){
+                o.num += item.number;
+                o.total += item.number * item.price
+            }
+        })
+        return o;
     }
   }
 })
