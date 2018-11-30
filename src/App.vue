@@ -1,7 +1,11 @@
 <template>
   <div class="app-container">
     <!--头部-->
-    <mt-header fixed title="三生三世十里桃花一心一意百年风月"></mt-header>
+    <mt-header fixed title="三生三世十里桃花一心一意百年风月">
+        <span slot="left" @click="goBack" v-if="flag">
+            <mt-button icon="back">返回</mt-button>
+        </span>
+    </mt-header>
     <!--底部-->
     <footer>
         <nav class="mui-bar mui-bar-tab">
@@ -30,6 +34,26 @@
   </div>
 </template>
 <script>
+export default {
+    data(){
+        return {
+            flag: true
+        }
+    },
+    created() {
+        this.flag = !(this.$route.path === "/home")
+    },
+    methods:{
+        goBack(){
+            this.$router.go(-1);
+        }
+    },
+    watch:{
+       "$route.path":function(newVal){
+           this.flag = !(newVal === "/home")
+       }
+    }
+}
 </script>
 <style lang="less">
     body {
