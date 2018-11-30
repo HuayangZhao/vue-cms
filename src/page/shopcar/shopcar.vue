@@ -30,7 +30,10 @@
                 <div class="mui-card-content-inner jiesuan">
                     <div class="left">
                         <p>总计（不含运费）</p>
-                        <p>已勾选商品 <span class="red">5</span> 件， 总价 <span class="red">￥4444</span></p>
+                        <p>已勾选商品 
+                            <span class="red">{{$store.getters.getNumTrue.num}}</span> 件， 总价 
+                            <span class="red">￥{{$store.getters.getNumTrue.total}}</span>
+                        </p>
                      </div>
                     <mt-button type="danger">去结算</mt-button>
                 </div>
