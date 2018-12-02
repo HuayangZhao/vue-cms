@@ -141,7 +141,6 @@
         const badgePosition = document
             .getElementById("badge")
             .getBoundingClientRect();
-
         const xDist = badgePosition.left - ballPosition.left;
         const yDist = badgePosition.top - ballPosition.top;
 
@@ -152,6 +151,11 @@
   ```
 3.利用vuex进行组件之间的传值
 
+### 制作购物车
+1.利用vuex和本地存储进行组件之间的传值，实现购物车数据状态之间的统一
+（这之间的痛苦逻辑简直不忍回忆）
+2.利用mutations,getters设置购物车中的状态管理，并同步到store中并进行金额计算
 
+不搞了！！！脸上的豆子又起来了
 
  

@@ -64,10 +64,6 @@ export default {
             margin: 0 auto;
         }
     }
-    body,footer,header{
-        max-width: 460px;
-        min-width: 300px;
-    }
     .app-container {
         overflow-x: hidden;
         padding-top: 40px;
